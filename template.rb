@@ -31,7 +31,7 @@ end
 
 gem 'pg', '~> 0.18'
 
-group :development, :test do
+gem_group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   # Adds support for Capybara system testing and selenium driver
@@ -39,7 +39,7 @@ group :development, :test do
   gem 'selenium-webdriver'
 end
 
-group :development do
+gem_group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
@@ -105,7 +105,7 @@ gem 'breadcrumbs_on_rails'
 gem 'i18n-tasks'
 
 
-group :development, :test do
+gem_group :development, :test do
   gem 'timecop'
   gem 'rspec'
   gem 'rspec-rails'
@@ -121,7 +121,7 @@ group :development, :test do
   gem 'webmock'
 end
 
-group :development do
+gem_group :development do
   gem 'bullet'
   gem 'better_errors'
   gem 'binding_of_caller'
