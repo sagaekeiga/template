@@ -1,6 +1,6 @@
 
 
-route "root to: 'people#index'"
+route "root to: 'welcome#index'"
 after_bundle do
   git :init
   git add: "."
