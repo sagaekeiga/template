@@ -259,7 +259,7 @@ run 'echo "# #{@app_name}" >> README.md'
 git :init
 git add: "."
 git commit: %Q{ -m 'Initial commit' }
-git remote: "add origin #{app_name}"
+run 'git init --bare --shared'
 git push: '-u origin master'
 
 
