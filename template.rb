@@ -255,7 +255,7 @@ file 'config/database.yml', <<-CODE
    password: <%= ENV['"#{@app_name.upcase}"'] %>
 CODE
 
-run "echo # #{@app_name} >> README.md"
+run 'echo "# #{@app_name}" >> README.md'
 git :init
 git add: "."
 git commit: %Q{ -m 'Initial commit' }
