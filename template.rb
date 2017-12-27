@@ -198,7 +198,7 @@ file 'config/database.yml', <<-CODE
 
  development:
    <<: *default
-   database: sharedine_development
+   database: #{@app_name}_development
 
    # The specified database role being used to connect to postgres.
    # To create additional roles in postgres see `$ createuser --help`.
@@ -232,7 +232,7 @@ file 'config/database.yml', <<-CODE
  # Do not set this db to the same as development or production.
  test:
    <<: *default
-   database: sharedine_test
+   database: #{@app_name}_test
 
  # As with config/secrets.yml, you never want to store sensitive information,
  # like your database password, in your source code. If your source code is
@@ -255,7 +255,11 @@ file 'config/database.yml', <<-CODE
  #
  production:
    <<: *default
-   database: sharedine_production
-   username: sharedine
-   password: <%= ENV[''] %>
+   database: #{@app_name}_production
+   username: @app_name
+   password: <%= ENV['"#{@app_name.upcase}"'] %>
 CODE
+
+run "heroku create #{@app_name}"
+git push: 'heroku master'
+run 'heroku run rake db:migrate'
