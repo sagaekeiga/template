@@ -2,11 +2,6 @@
 
 
 route "root to: 'welcome#index'"
-after_bundle do
-  git :init
-  git add: "."
-  git commit: %Q{ -m 'Initial commit' }
-end
 
 
 #
@@ -259,6 +254,14 @@ file 'config/database.yml', <<-CODE
    username: @app_name
    password: <%= ENV['"#{@app_name.upcase}"'] %>
 CODE
+
+echo "# #{@app_name}" >> README.md
+git :init
+git add: "."
+git commit: %Q{ -m 'Initial commit' }
+git remote: "add origin https://github.com/sagaekeiga/#{app_name}.git"
+git push: '-u origin master'
+
 
 run "heroku create #{@app_name}"
 git push: 'heroku master'
