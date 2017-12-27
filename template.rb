@@ -8,12 +8,6 @@ after_bundle do
   git commit: %Q{ -m 'Initial commit' }
 end
 
-#
-# remove
-#
-
-remove_file 'config/database.yml'
-
 
 #
 # ask
@@ -108,7 +102,7 @@ gem 'httparty'
 gem 'sidekiq'
 gem 'audited'
 gem 'acts-as-taggable-on'
-gem 'factory_girl_rails'
+gem 'factory_bot'
 gem 'bootstrap-generators'
 gem 'faker'
 gem 'faker-japanese'
@@ -166,6 +160,12 @@ run 'bundle exec annotate'
 generate 'rspec:install'
 generate 'rails_config:install'
 
+
+#
+# remove
+#
+
+remove_file 'config/database.yml'
 
 #
 # heroku
