@@ -135,7 +135,7 @@ gem 'omniauth-twitter'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2', '0.5.0'
 gem 'foreman'
-add_source 'https://rails-assets.org' do
+add_source "https://rails-assets.org" do
   gem 'rails-assets-bootstrap-fileinput'
   gem 'rails-assets-eonasdan-bootstrap-datetimepicker'
 end
