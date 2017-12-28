@@ -115,7 +115,7 @@ gem_group :development, :test do
   gem 'database_rewinder'
   gem 'json_spec'
   gem 'guard-rspec'
-  gem 'rubocop', require: false
+  gem 'rubocop', '~> 0.49.0', require: false
   gem 'letter_opener_web'
   gem 'simplecov', require: false
   gem 'webmock'
@@ -148,12 +148,6 @@ end
 gsub_file 'Gemfile', "gem 'sqlite3'", "# gem 'sqlite3'"
 run 'bundle install'
 run './bin/rake haml:replace_erbs'
-
-#
-# generators
-#
-
-generate 'rails_config:install'
 
 
 #
@@ -255,6 +249,11 @@ file 'config/database.yml', <<-CODE
    password: <%= ENV['"#{@app_name.upcase}"'] %>
 CODE
 
+#
+# generators
+#
+
+generate 'rails_config:install'
 generate 'rspec:install'
 run 'bundle exec annotate'
 run "echo # #{@app_name} >> 'README.md'"
