@@ -30,6 +30,7 @@ end
 # Gemfile
 #
 
+comment_lines 'Gemfile', "gem 'sqlite3'"
 gem 'pg', '~> 0.18'
 gem_group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
