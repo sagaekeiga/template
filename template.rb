@@ -144,6 +144,8 @@ end
 #
 # run
 #
+
+gsub_file 'Gemfile', "gem 'sqlite3'", "# gem 'sqlite3'"
 run 'bundle install'
 run './bin/rake haml:replace_erbs'
 
