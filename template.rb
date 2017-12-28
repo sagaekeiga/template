@@ -153,7 +153,6 @@ run './bin/rake haml:replace_erbs'
 # generators
 #
 
-generate 'rspec:install'
 generate 'rails_config:install'
 
 
@@ -256,6 +255,7 @@ file 'config/database.yml', <<-CODE
    password: <%= ENV['"#{@app_name.upcase}"'] %>
 CODE
 
+generate 'rspec:install'
 run 'bundle exec annotate'
 run "echo # #{@app_name} >> 'README.md'"
 git :init
