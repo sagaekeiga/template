@@ -30,7 +30,6 @@ end
 # Gemfile
 #
 
-comment_lines 'Gemfile', "gem 'sqlite3'"
 gem 'pg', '~> 0.18'
 gem_group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -147,7 +146,6 @@ end
 #
 run 'bundle install'
 run './bin/rake haml:replace_erbs'
-run 'bundle exec annotate'
 
 #
 # generators
@@ -252,10 +250,11 @@ file 'config/database.yml', <<-CODE
  production:
    <<: *default
    database: #{@app_name}_production
-   username: @app_name
+   username: #{@app_name}
    password: <%= ENV['"#{@app_name.upcase}"'] %>
 CODE
 
+run 'bundle exec annotate'
 run "echo # #{@app_name} >> 'README.md'"
 git :init
 git add: "."
