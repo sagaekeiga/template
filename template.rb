@@ -259,7 +259,7 @@ run 'echo "# #{@app_name}" >> README.md'
 git :init
 git add: "."
 git commit: %Q{ -m 'Initial commit' }
-git init: '--bare --shared'
+git remote: "add origin https://github.com/sagaekeiga/#{@app_name}.git"
 git push: '-u origin master'
 
 
