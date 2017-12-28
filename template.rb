@@ -115,7 +115,7 @@ gem_group :development, :test do
   gem 'database_rewinder'
   gem 'json_spec'
   gem 'guard-rspec'
-  gem 'rubocop', '~> 0.49.0', require: false
+  gem 'rubocop', '~> 0.52.1', require: false
   gem 'letter_opener_web'
   gem 'simplecov', require: false
   gem 'webmock'
