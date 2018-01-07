@@ -435,7 +435,9 @@ CODE
 # Devise
 #
 run 'rails g devise:install'
-insert_into_file 'config/environments/development.rb', <<RUBY, after: "config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }"
+insert_into_file 'config/environments/development.rb', <<-CODE
+  after: "config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }"
+CODE
 run 'rails g devise:views'
 run 'rails g devise User'
 
