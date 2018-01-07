@@ -309,128 +309,128 @@ PUSHER_CLUSTER=""
 WEB_DOMAIN=""
 CODE
 
-# #
-# # SCSS
-# #
-# remove_file 'app/assets/stylesheets/application.css'
 #
-# file 'app/assets/stylesheets/application.scss', <<-CODE
-# /*
-#  * This is a manifest file that'll be compiled into application.css, which will include all the files
-#  * listed below.
-#  *
-#  * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
-#  * vendor/assets/stylesheets directory can be referenced here using a relative path.
-#  *
-#  * You're free to add application-wide styles to this file and they'll appear at the bottom of the
-#  * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
-#  * files in this directory. Styles in this file should be added after the last require_* statement.
-#  * It is generally better to create a new file per style scope.
-#  *
-#  *= require_tree .
-#  *= require_self
-#  */
+# SCSS
 #
-# @import 'bootstrap-sprockets';
-# @import 'bootstrap';
-# @import 'bootstrap-fileinput';
-# @import 'honoka';
+remove_file 'app/assets/stylesheets/application.css'
+
+file 'app/assets/stylesheets/application.scss', <<-CODE
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+@import 'bootstrap-sprockets';
+@import 'bootstrap';
+@import 'bootstrap-fileinput';
+@import 'honoka';
+
+.m-t-0 { margin-top: 0; }
+.m-t-1 { margin-top: $padding-base-vertical; }
+.m-t-2 { margin-top: $padding-base-vertical * 2; }
+.m-t-4 { margin-top: $padding-base-vertical * 4; }
+
+.m-b-0 { margin-bottom: 0; }
+.m-b-1 { margin-bottom: $padding-base-vertical; }
+.m-b-2 { margin-bottom: $padding-base-vertical * 2; }
+
+.p-l-1 { padding-left: $padding-base-horizontal; }
+.p-r-1 { padding-right: $padding-base-horizontal; }
+.p-b-1 { padding-bottom: $padding-base-horizontal; }
+
+.m-l-1 { margin-left: $padding-base-horizontal; }
+.m-r-1 { margin-right: $padding-base-horizontal; }
+CODE
+
 #
-# .m-t-0 { margin-top: 0; }
-# .m-t-1 { margin-top: $padding-base-vertical; }
-# .m-t-2 { margin-top: $padding-base-vertical * 2; }
-# .m-t-4 { margin-top: $padding-base-vertical * 4; }
+# JS
 #
-# .m-b-0 { margin-bottom: 0; }
-# .m-b-1 { margin-bottom: $padding-base-vertical; }
-# .m-b-2 { margin-bottom: $padding-base-vertical * 2; }
+remove_file 'app/assets/javascripts/application.js'
+
+file 'app/assets/javascripts/application.coffee', <<-CODE
+# This is a manifest file that'll be compiled into application.js, which will include all the files
+# listed below.
 #
-# .p-l-1 { padding-left: $padding-base-horizontal; }
-# .p-r-1 { padding-right: $padding-base-horizontal; }
-# .p-b-1 { padding-bottom: $padding-base-horizontal; }
+# Any JavaScript/Coffee file within this directory, lib/assets/javascripts, or any plugin's
+# vendor/assets/javascripts directory can be referenced here using a relative path.
 #
-# .m-l-1 { margin-left: $padding-base-horizontal; }
-# .m-r-1 { margin-right: $padding-base-horizontal; }
-# CODE
+# It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
+# compiled file. JavaScript code in this file should be added after the last require_* statement.
 #
-# #
-# # JS
-# #
-# remove_file 'app/assets/javascripts/application.js'
+# Read Sprockets README (https:#github.com/rails/sprockets#sprockets-directives) for details
+# about supported directives.
 #
-# file 'app/assets/javascripts/application.coffee', <<-CODE
-# # This is a manifest file that'll be compiled into application.js, which will include all the files
-# # listed below.
-# #
-# # Any JavaScript/Coffee file within this directory, lib/assets/javascripts, or any plugin's
-# # vendor/assets/javascripts directory can be referenced here using a relative path.
-# #
-# # It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
-# # compiled file. JavaScript code in this file should be added after the last require_* statement.
-# #
-# # Read Sprockets README (https:#github.com/rails/sprockets#sprockets-directives) for details
-# # about supported directives.
-# #
-# #= require rails-ujs
-# #= require jquery
-# #= require jquery.turbolinks
-# #= require turbolinks
-# #= require bootstrap
-# #= require bootstrap-sprockets
-# #= require bootstrap-fileinput
-# #= require bootstrap-fileinput/locales/ja
-# #= require moment
-# #= require moment/locale/ja
-# #= require cocoon
-# #= require turbolinks
-# #= require_tree .
+#= require rails-ujs
+#= require jquery
+#= require jquery.turbolinks
+#= require turbolinks
+#= require bootstrap
+#= require bootstrap-sprockets
+#= require bootstrap-fileinput
+#= require bootstrap-fileinput/locales/ja
+#= require moment
+#= require moment/locale/ja
+#= require cocoon
+#= require turbolinks
+#= require_tree .
+
+# こちらはページ遷移する度に呼ばれる（初回ページ読み込み時も含む）
+$(document).on 'turbolinks:load', ->
+
+  #
+  # File Input
+  #
+  $('input[type="file"]').fileinput
+    showUpload: false
+    showPreview: true
+    allowedPreviewMimeTypes: false
+    previewFileType: 'image'
+    language: 'ja'
+CODE
+
 #
-# # こちらはページ遷移する度に呼ばれる（初回ページ読み込み時も含む）
-# $(document).on 'turbolinks:load', ->
+# application.html.haml
 #
-#   #
-#   # File Input
-#   #
-#   $('input[type="file"]').fileinput
-#     showUpload: false
-#     showPreview: true
-#     allowedPreviewMimeTypes: false
-#     previewFileType: 'image'
-#     language: 'ja'
-# CODE
-#
-# #
-# # application.html.haml
-# #
-#
-# remove_file 'app/views/layouts/application.html.haml'
-# key = 'key'
-# file 'app/views/layouts/application.html.haml', <<-CODE
-# !!!
-# %html
-#   %head
-#     %meta{ content: 'text/html; charset=UTF-8', 'http-equiv': 'Content-Type' }/
-#     %meta{ name: 'viewport', content: 'width=device-width, initial-scale=1.0' }
-#     %title #{@app_name}
-#     = csrf_meta_tags
-#     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
-#     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
-#   %body
-#     %header
-#       %nav
-#         - if user_signed_in?
-#           %strong
-#             = link_to 'プロフィール変更', edit_user_registration_path
-#             = link_to 'ログアウト', destroy_user_session_path, method: :delete
-#         - else
-#           = link_to 'サインアップ', new_user_registration_path
-#           = link_to 'ログイン', new_user_session_path
-#
-#     - !content_for?(:flash) && flash && flash.each do |key, message|
-#       .alert{ class: "alert-#{key}", role: 'alert' }
-#         %strong= message
-#     = yield
-# CODE
+
+remove_file 'app/views/layouts/application.html.haml'
+key = 'key'
+file 'app/views/layouts/application.html.haml', <<-CODE
+!!!
+%html
+  %head
+    %meta{ content: 'text/html; charset=UTF-8', 'http-equiv': 'Content-Type' }/
+    %meta{ name: 'viewport', content: 'width=device-width, initial-scale=1.0' }
+    %title #{@app_name}
+    = csrf_meta_tags
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+  %body
+    %header
+      %nav
+        - if user_signed_in?
+          %strong
+            = link_to 'プロフィール変更', edit_user_registration_path
+            = link_to 'ログアウト', destroy_user_session_path, method: :delete
+        - else
+          = link_to 'サインアップ', new_user_registration_path
+          = link_to 'ログイン', new_user_session_path
+
+    - !content_for?(:flash) && flash && flash.each do |key, message|
+      .alert{ class: "alert-#{key}", role: 'alert' }
+        %strong= message
+    = yield
+CODE
 
 # #
 # # Devise
