@@ -18,7 +18,7 @@ rakefile('app.rake') do
   <<-TASK
     namespace :app do
       namespace :dev do
-        task reset: %i( db:drop db:create db:migrate db:seed app:dev:bank_data app:dev:sample)
+        task reset: %i( db:drop db:create db:migrate db:seed app:dev:sample)
         task sample: :environment do
         end
       end
@@ -103,8 +103,9 @@ gem 'faker'
 gem 'faker-japanese'
 gem 'breadcrumbs_on_rails'
 gem 'i18n-tasks'
-
-
+gem 'google-analytics-rails'
+gem 'dotenv-rails'
+gem 'honoka-rails'
 gem_group :development, :test do
   gem 'timecop'
   gem 'rspec'
@@ -254,8 +255,10 @@ CODE
 #
 
 generate 'rails_config:install'
+run 'bundle exec rails g config:install'
 generate 'rspec:install'
 run 'bundle exec annotate'
+run 'rails app:dev:reset'
 run "echo # #{@app_name} >> 'README.md'"
 git :init
 git add: "."
@@ -267,3 +270,153 @@ git push: '-u origin master'
 run "heroku create #{@app_name}"
 git push: 'heroku master'
 run 'heroku run rake db:migrate'
+
+
+#
+# env
+#
+
+file '.env', <<-CODE
+# Omniauth
+FACEBOOK_APP_ID=""
+FACEBOOK_APP_SECRET=""
+
+# Google reCAPTCHA
+RECAPTCHA_SITE_KEY=""
+RECAPTCHA_SECRET_KEY=""
+
+# Redis
+# for Docker
+# REDIS_URL=redis://cache:6379/0
+REDIS_URL=redis://localhost:6379/0
+
+RAILS_LOG_TO_STDOUT=true
+
+# GOOGLE ANALYTICS
+GOOGLE_TRACKING_ID=UA-111735982-1
+CODE
+
+file 'dotenv.sample', <<-CODE
+# Omniauth
+FACEBOOK_APP_ID=""
+FACEBOOK_APP_SECRET=""
+
+# Google
+GOOGLE_CLIENT_ID=""
+GOOGLE_CLIENT_SECRET=""
+GOOGLE_REDIRECT_URI=""
+
+# Redis
+# for Docker
+# REDIS_URL=redis://cache:6379/0
+REDIS_URL=redis://localhost:6379/0
+
+RAILS_LOG_TO_STDOUT=true
+
+# GMO Payment Gateway
+GMO_PG_SITE_ID=""
+GMO_PG_SITE_PASS=""
+GMO_PG_SHOP_ID=""
+GMO_PG_SHOP_PASS=""
+GMO_PG_API_URL=""
+
+# Pusher
+PUSHER_ID=""
+PUSHER_KEY=""
+PUSHER_SECRET=""
+PUSHER_CLUSTER=""
+
+# domain constraint
+WEB_DOMAIN=""
+CODE
+
+#
+# SCSS
+#
+remove_file 'app/assets/stylesheets/application.css'
+
+file 'app/assets/stylesheets/application.scss', <<-CODE
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require fullcalendar
+ *= require_tree .
+ *= require_self
+ */
+
+@import 'bootstrap-sprockets';
+@import 'bootstrap';
+@import 'bootstrap-fileinput';
+@import 'honoka';
+
+.m-t-0 { margin-top: 0; }
+.m-t-1 { margin-top: $padding-base-vertical; }
+.m-t-2 { margin-top: $padding-base-vertical * 2; }
+.m-t-4 { margin-top: $padding-base-vertical * 4; }
+
+.m-b-0 { margin-bottom: 0; }
+.m-b-1 { margin-bottom: $padding-base-vertical; }
+.m-b-2 { margin-bottom: $padding-base-vertical * 2; }
+
+.p-l-1 { padding-left: $padding-base-horizontal; }
+.p-r-1 { padding-right: $padding-base-horizontal; }
+.p-b-1 { padding-bottom: $padding-base-horizontal; }
+
+.m-l-1 { margin-left: $padding-base-horizontal; }
+.m-r-1 { margin-right: $padding-base-horizontal; }
+CODE
+
+#
+# SCSS
+#
+remove_file 'app/assets/javascripts/application.js'
+
+file 'app/assets/javascripts/application.coffee', <<-CODE
+# This is a manifest file that'll be compiled into application.js, which will include all the files
+# listed below.
+#
+# Any JavaScript/Coffee file within this directory, lib/assets/javascripts, or any plugin's
+# vendor/assets/javascripts directory can be referenced here using a relative path.
+#
+# It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
+# compiled file. JavaScript code in this file should be added after the last require_* statement.
+#
+# Read Sprockets README (https:#github.com/rails/sprockets#sprockets-directives) for details
+# about supported directives.
+#
+#= require rails-ujs
+#= require jquery
+#= require jquery.turbolinks
+#= require turbolinks
+#= require bootstrap
+#= require bootstrap-sprockets
+#= require bootstrap-fileinput
+#= require bootstrap-fileinput/locales/ja
+#= require moment
+#= require moment/locale/ja
+#= require cocoon
+#= require turbolinks
+#= require_tree .
+
+# こちらはページ遷移する度に呼ばれる（初回ページ読み込み時も含む）
+$(document).on 'turbolinks:load', ->
+
+  #
+  # File Input
+  #
+  $('input[type="file"]').fileinput
+    showUpload: false
+    showPreview: true
+    allowedPreviewMimeTypes: false
+    previewFileType: 'image'
+    language: 'ja'
+CODE
