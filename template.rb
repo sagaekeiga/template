@@ -251,28 +251,6 @@ file 'config/database.yml', <<-CODE
 CODE
 
 #
-# generators
-#
-
-generate 'rails_config:install'
-run 'bundle exec rails g config:install'
-generate 'rspec:install'
-run 'bundle exec annotate'
-run 'rails app:dev:reset'
-run "echo # #{@app_name} >> 'README.md'"
-git :init
-git add: "."
-git commit: %Q{ -m 'Initial commit' }
-git remote: "add origin https://github.com/sagaekeiga/#{@app_name}.git"
-git push: '-u origin master'
-
-
-run "heroku create #{@app_name}"
-git push: 'heroku master'
-run 'heroku run rake db:migrate'
-
-
-#
 # env
 #
 
@@ -420,3 +398,64 @@ $(document).on 'turbolinks:load', ->
     previewFileType: 'image'
     language: 'ja'
 CODE
+
+#
+# application.html.haml
+#
+
+remove_file 'app/views/layouts/application.html.haml'
+file 'app/views/layouts/application.html.haml', <<-CODE
+!!!
+%html
+  %head
+    %meta{ content: 'text/html; charset=UTF-8', 'http-equiv': 'Content-Type' }/
+    %meta{ name: 'viewport', content: 'width=device-width, initial-scale=1.0' }
+    %title #{@app_name}
+    = csrf_meta_tags
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+  %body
+    %header
+      %nav
+        - if user_signed_in?
+          %strong
+            = link_to 'プロフィール変更', edit_user_registration_path
+            = link_to 'ログアウト', destroy_user_session_path, method: :delete
+        - else
+          = link_to 'サインアップ', new_user_registration_path
+          = link_to 'ログイン', new_user_session_path
+
+    - !content_for?(:flash) && flash && flash.each do |key, message|
+      .alert{ class: "alert-#{key}", role: 'alert' }
+        %strong= message
+    = yield
+CODE
+
+#
+# Devise
+#
+run 'rails g devise:install'
+insert_into_file 'config/environments/development.rb', <<RUBY, after: "config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }"
+run 'rails g devise:views'
+run 'rails g devise User'
+
+#
+# generators
+#
+
+generate 'rails_config:install'
+run 'bundle exec rails g config:install'
+generate 'rspec:install'
+run 'bundle exec annotate'
+run 'rails app:dev:reset'
+run "echo # #{@app_name} >> 'README.md'"
+git :init
+git add: "."
+git commit: %Q{ -m 'Initial commit' }
+git remote: "add origin https://github.com/sagaekeiga/#{@app_name}.git"
+git push: '-u origin master'
+
+
+run "heroku create #{@app_name}"
+git push: 'heroku master'
+run 'heroku run rake db:migrate'
