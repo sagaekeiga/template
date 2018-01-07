@@ -404,6 +404,7 @@ CODE
 #
 
 remove_file 'app/views/layouts/application.html.haml'
+key = 'key'
 file 'app/views/layouts/application.html.haml', <<-CODE
 !!!
 %html
@@ -426,7 +427,7 @@ file 'app/views/layouts/application.html.haml', <<-CODE
           = link_to 'ログイン', new_user_session_path
 
     - !content_for?(:flash) && flash && flash.each do |key, message|
-      .alert{ class: alert-'#{'key'}', role: 'alert' }
+      .alert{ class: "alert-#{key}", role: 'alert' }
         %strong= message
     = yield
 CODE
