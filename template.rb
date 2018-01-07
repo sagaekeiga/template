@@ -433,6 +433,11 @@ file 'app/views/layouts/application.html.haml', <<-CODE
 CODE
 
 #
+# Devise
+#
+run 'rails g devise:install'
+
+#
 # generators
 #
 
