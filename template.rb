@@ -250,186 +250,186 @@ file 'config/database.yml', <<-CODE
    password: <%= ENV['"#{@app_name.upcase}"'] %>
 CODE
 
+# #
+# # env
+# #
 #
-# env
+# file '.env', <<-CODE
+# # Omniauth
+# FACEBOOK_APP_ID=""
+# FACEBOOK_APP_SECRET=""
 #
-
-file '.env', <<-CODE
-# Omniauth
-FACEBOOK_APP_ID=""
-FACEBOOK_APP_SECRET=""
-
-# Google reCAPTCHA
-RECAPTCHA_SITE_KEY=""
-RECAPTCHA_SECRET_KEY=""
-
-# Redis
-# for Docker
-# REDIS_URL=redis://cache:6379/0
-REDIS_URL=redis://localhost:6379/0
-
-RAILS_LOG_TO_STDOUT=true
-
-# GOOGLE ANALYTICS
-GOOGLE_TRACKING_ID=UA-111735982-1
-CODE
-
-file 'dotenv.sample', <<-CODE
-# Omniauth
-FACEBOOK_APP_ID=""
-FACEBOOK_APP_SECRET=""
-
-# Google
-GOOGLE_CLIENT_ID=""
-GOOGLE_CLIENT_SECRET=""
-GOOGLE_REDIRECT_URI=""
-
-# Redis
-# for Docker
-# REDIS_URL=redis://cache:6379/0
-REDIS_URL=redis://localhost:6379/0
-
-RAILS_LOG_TO_STDOUT=true
-
-# GMO Payment Gateway
-GMO_PG_SITE_ID=""
-GMO_PG_SITE_PASS=""
-GMO_PG_SHOP_ID=""
-GMO_PG_SHOP_PASS=""
-GMO_PG_API_URL=""
-
-# Pusher
-PUSHER_ID=""
-PUSHER_KEY=""
-PUSHER_SECRET=""
-PUSHER_CLUSTER=""
-
-# domain constraint
-WEB_DOMAIN=""
-CODE
-
+# # Google reCAPTCHA
+# RECAPTCHA_SITE_KEY=""
+# RECAPTCHA_SECRET_KEY=""
 #
-# SCSS
+# # Redis
+# # for Docker
+# # REDIS_URL=redis://cache:6379/0
+# REDIS_URL=redis://localhost:6379/0
 #
-remove_file 'app/assets/stylesheets/application.css'
-
-file 'app/assets/stylesheets/application.scss', <<-CODE
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
- *= require_tree .
- *= require_self
- */
-
-@import 'bootstrap-sprockets';
-@import 'bootstrap';
-@import 'bootstrap-fileinput';
-@import 'honoka';
-
-.m-t-0 { margin-top: 0; }
-.m-t-1 { margin-top: $padding-base-vertical; }
-.m-t-2 { margin-top: $padding-base-vertical * 2; }
-.m-t-4 { margin-top: $padding-base-vertical * 4; }
-
-.m-b-0 { margin-bottom: 0; }
-.m-b-1 { margin-bottom: $padding-base-vertical; }
-.m-b-2 { margin-bottom: $padding-base-vertical * 2; }
-
-.p-l-1 { padding-left: $padding-base-horizontal; }
-.p-r-1 { padding-right: $padding-base-horizontal; }
-.p-b-1 { padding-bottom: $padding-base-horizontal; }
-
-.m-l-1 { margin-left: $padding-base-horizontal; }
-.m-r-1 { margin-right: $padding-base-horizontal; }
-CODE
-
+# RAILS_LOG_TO_STDOUT=true
 #
-# SCSS
+# # GOOGLE ANALYTICS
+# GOOGLE_TRACKING_ID=UA-111735982-1
+# CODE
 #
-remove_file 'app/assets/javascripts/application.js'
-
-file 'app/assets/javascripts/application.coffee', <<-CODE
-# This is a manifest file that'll be compiled into application.js, which will include all the files
-# listed below.
+# file 'dotenv.sample', <<-CODE
+# # Omniauth
+# FACEBOOK_APP_ID=""
+# FACEBOOK_APP_SECRET=""
 #
-# Any JavaScript/Coffee file within this directory, lib/assets/javascripts, or any plugin's
-# vendor/assets/javascripts directory can be referenced here using a relative path.
+# # Google
+# GOOGLE_CLIENT_ID=""
+# GOOGLE_CLIENT_SECRET=""
+# GOOGLE_REDIRECT_URI=""
 #
-# It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
-# compiled file. JavaScript code in this file should be added after the last require_* statement.
+# # Redis
+# # for Docker
+# # REDIS_URL=redis://cache:6379/0
+# REDIS_URL=redis://localhost:6379/0
 #
-# Read Sprockets README (https:#github.com/rails/sprockets#sprockets-directives) for details
-# about supported directives.
+# RAILS_LOG_TO_STDOUT=true
 #
-#= require rails-ujs
-#= require jquery
-#= require jquery.turbolinks
-#= require turbolinks
-#= require bootstrap
-#= require bootstrap-sprockets
-#= require bootstrap-fileinput
-#= require bootstrap-fileinput/locales/ja
-#= require moment
-#= require moment/locale/ja
-#= require cocoon
-#= require turbolinks
-#= require_tree .
-
-# こちらはページ遷移する度に呼ばれる（初回ページ読み込み時も含む）
-$(document).on 'turbolinks:load', ->
-
-  #
-  # File Input
-  #
-  $('input[type="file"]').fileinput
-    showUpload: false
-    showPreview: true
-    allowedPreviewMimeTypes: false
-    previewFileType: 'image'
-    language: 'ja'
-CODE
-
+# # GMO Payment Gateway
+# GMO_PG_SITE_ID=""
+# GMO_PG_SITE_PASS=""
+# GMO_PG_SHOP_ID=""
+# GMO_PG_SHOP_PASS=""
+# GMO_PG_API_URL=""
 #
-# application.html.haml
+# # Pusher
+# PUSHER_ID=""
+# PUSHER_KEY=""
+# PUSHER_SECRET=""
+# PUSHER_CLUSTER=""
 #
-
-remove_file 'app/views/layouts/application.html.haml'
-key = 'key'
-file 'app/views/layouts/application.html.haml', <<-CODE
-!!!
-%html
-  %head
-    %meta{ content: 'text/html; charset=UTF-8', 'http-equiv': 'Content-Type' }/
-    %meta{ name: 'viewport', content: 'width=device-width, initial-scale=1.0' }
-    %title #{@app_name}
-    = csrf_meta_tags
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
-    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
-  %body
-    %header
-      %nav
-        - if user_signed_in?
-          %strong
-            = link_to 'プロフィール変更', edit_user_registration_path
-            = link_to 'ログアウト', destroy_user_session_path, method: :delete
-        - else
-          = link_to 'サインアップ', new_user_registration_path
-          = link_to 'ログイン', new_user_session_path
-
-    - !content_for?(:flash) && flash && flash.each do |key, message|
-      .alert{ class: "alert-#{key}", role: 'alert' }
-        %strong= message
-    = yield
-CODE
+# # domain constraint
+# WEB_DOMAIN=""
+# CODE
+#
+# #
+# # SCSS
+# #
+# remove_file 'app/assets/stylesheets/application.css'
+#
+# file 'app/assets/stylesheets/application.scss', <<-CODE
+# /*
+#  * This is a manifest file that'll be compiled into application.css, which will include all the files
+#  * listed below.
+#  *
+#  * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+#  * vendor/assets/stylesheets directory can be referenced here using a relative path.
+#  *
+#  * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+#  * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+#  * files in this directory. Styles in this file should be added after the last require_* statement.
+#  * It is generally better to create a new file per style scope.
+#  *
+#  *= require_tree .
+#  *= require_self
+#  */
+#
+# @import 'bootstrap-sprockets';
+# @import 'bootstrap';
+# @import 'bootstrap-fileinput';
+# @import 'honoka';
+#
+# .m-t-0 { margin-top: 0; }
+# .m-t-1 { margin-top: $padding-base-vertical; }
+# .m-t-2 { margin-top: $padding-base-vertical * 2; }
+# .m-t-4 { margin-top: $padding-base-vertical * 4; }
+#
+# .m-b-0 { margin-bottom: 0; }
+# .m-b-1 { margin-bottom: $padding-base-vertical; }
+# .m-b-2 { margin-bottom: $padding-base-vertical * 2; }
+#
+# .p-l-1 { padding-left: $padding-base-horizontal; }
+# .p-r-1 { padding-right: $padding-base-horizontal; }
+# .p-b-1 { padding-bottom: $padding-base-horizontal; }
+#
+# .m-l-1 { margin-left: $padding-base-horizontal; }
+# .m-r-1 { margin-right: $padding-base-horizontal; }
+# CODE
+#
+# #
+# # JS
+# #
+# remove_file 'app/assets/javascripts/application.js'
+#
+# file 'app/assets/javascripts/application.coffee', <<-CODE
+# # This is a manifest file that'll be compiled into application.js, which will include all the files
+# # listed below.
+# #
+# # Any JavaScript/Coffee file within this directory, lib/assets/javascripts, or any plugin's
+# # vendor/assets/javascripts directory can be referenced here using a relative path.
+# #
+# # It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
+# # compiled file. JavaScript code in this file should be added after the last require_* statement.
+# #
+# # Read Sprockets README (https:#github.com/rails/sprockets#sprockets-directives) for details
+# # about supported directives.
+# #
+# #= require rails-ujs
+# #= require jquery
+# #= require jquery.turbolinks
+# #= require turbolinks
+# #= require bootstrap
+# #= require bootstrap-sprockets
+# #= require bootstrap-fileinput
+# #= require bootstrap-fileinput/locales/ja
+# #= require moment
+# #= require moment/locale/ja
+# #= require cocoon
+# #= require turbolinks
+# #= require_tree .
+#
+# # こちらはページ遷移する度に呼ばれる（初回ページ読み込み時も含む）
+# $(document).on 'turbolinks:load', ->
+#
+#   #
+#   # File Input
+#   #
+#   $('input[type="file"]').fileinput
+#     showUpload: false
+#     showPreview: true
+#     allowedPreviewMimeTypes: false
+#     previewFileType: 'image'
+#     language: 'ja'
+# CODE
+#
+# #
+# # application.html.haml
+# #
+#
+# remove_file 'app/views/layouts/application.html.haml'
+# key = 'key'
+# file 'app/views/layouts/application.html.haml', <<-CODE
+# !!!
+# %html
+#   %head
+#     %meta{ content: 'text/html; charset=UTF-8', 'http-equiv': 'Content-Type' }/
+#     %meta{ name: 'viewport', content: 'width=device-width, initial-scale=1.0' }
+#     %title #{@app_name}
+#     = csrf_meta_tags
+#     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+#     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+#   %body
+#     %header
+#       %nav
+#         - if user_signed_in?
+#           %strong
+#             = link_to 'プロフィール変更', edit_user_registration_path
+#             = link_to 'ログアウト', destroy_user_session_path, method: :delete
+#         - else
+#           = link_to 'サインアップ', new_user_registration_path
+#           = link_to 'ログイン', new_user_session_path
+#
+#     - !content_for?(:flash) && flash && flash.each do |key, message|
+#       .alert{ class: "alert-#{key}", role: 'alert' }
+#         %strong= message
+#     = yield
+# CODE
 
 # #
 # # Devise
@@ -492,7 +492,6 @@ generate 'rails_config:install'
 run 'bundle exec rails g config:install'
 generate 'rspec:install'
 run 'bundle exec annotate'
-run 'bin/rails db:migrate RAILS_ENV=development'
 run 'rails app:dev:reset'
 run "echo # #{@app_name} >> 'README.md'"
 file '.gitignore', <<-CODE
