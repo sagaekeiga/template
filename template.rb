@@ -251,64 +251,64 @@ file 'config/database.yml', <<-CODE
    password: <%= ENV['"#{@app_name.upcase}"'] %>
 CODE
 
-# #
-# # env
-# #
 #
-# file '.env', <<-CODE
-# # Omniauth
-# FACEBOOK_APP_ID=""
-# FACEBOOK_APP_SECRET=""
+# env
 #
-# # Google reCAPTCHA
-# RECAPTCHA_SITE_KEY=""
-# RECAPTCHA_SECRET_KEY=""
-#
-# # Redis
-# # for Docker
-# # REDIS_URL=redis://cache:6379/0
-# REDIS_URL=redis://localhost:6379/0
-#
-# RAILS_LOG_TO_STDOUT=true
-#
-# # GOOGLE ANALYTICS
-# GOOGLE_TRACKING_ID=UA-111735982-1
-# CODE
-#
-# file 'dotenv.sample', <<-CODE
-# # Omniauth
-# FACEBOOK_APP_ID=""
-# FACEBOOK_APP_SECRET=""
-#
-# # Google
-# GOOGLE_CLIENT_ID=""
-# GOOGLE_CLIENT_SECRET=""
-# GOOGLE_REDIRECT_URI=""
-#
-# # Redis
-# # for Docker
-# # REDIS_URL=redis://cache:6379/0
-# REDIS_URL=redis://localhost:6379/0
-#
-# RAILS_LOG_TO_STDOUT=true
-#
-# # GMO Payment Gateway
-# GMO_PG_SITE_ID=""
-# GMO_PG_SITE_PASS=""
-# GMO_PG_SHOP_ID=""
-# GMO_PG_SHOP_PASS=""
-# GMO_PG_API_URL=""
-#
-# # Pusher
-# PUSHER_ID=""
-# PUSHER_KEY=""
-# PUSHER_SECRET=""
-# PUSHER_CLUSTER=""
-#
-# # domain constraint
-# WEB_DOMAIN=""
-# CODE
-#
+
+file '.env', <<-CODE
+# Omniauth
+FACEBOOK_APP_ID=""
+FACEBOOK_APP_SECRET=""
+
+# Google reCAPTCHA
+RECAPTCHA_SITE_KEY=""
+RECAPTCHA_SECRET_KEY=""
+
+# Redis
+# for Docker
+# REDIS_URL=redis://cache:6379/0
+REDIS_URL=redis://localhost:6379/0
+
+RAILS_LOG_TO_STDOUT=true
+
+# GOOGLE ANALYTICS
+GOOGLE_TRACKING_ID=UA-111735982-1
+CODE
+
+file 'dotenv.sample', <<-CODE
+# Omniauth
+FACEBOOK_APP_ID=""
+FACEBOOK_APP_SECRET=""
+
+# Google
+GOOGLE_CLIENT_ID=""
+GOOGLE_CLIENT_SECRET=""
+GOOGLE_REDIRECT_URI=""
+
+# Redis
+# for Docker
+# REDIS_URL=redis://cache:6379/0
+REDIS_URL=redis://localhost:6379/0
+
+RAILS_LOG_TO_STDOUT=true
+
+# GMO Payment Gateway
+GMO_PG_SITE_ID=""
+GMO_PG_SITE_PASS=""
+GMO_PG_SHOP_ID=""
+GMO_PG_SHOP_PASS=""
+GMO_PG_API_URL=""
+
+# Pusher
+PUSHER_ID=""
+PUSHER_KEY=""
+PUSHER_SECRET=""
+PUSHER_CLUSTER=""
+
+# domain constraint
+WEB_DOMAIN=""
+CODE
+
 # #
 # # SCSS
 # #
