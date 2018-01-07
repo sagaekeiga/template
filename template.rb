@@ -527,13 +527,13 @@ run "echo # #{@app_name} >> 'README.md'"
 # config/environments/*.local.yml
 #
 # CODE
-git :init
-git add: "."
-git commit: %Q{ -m 'Initial commit' }
-git remote: "add origin https://github.com/sagaekeiga/#{@app_name}.git"
-git push: '-u origin master'
-
-
-run "heroku create #{@app_name}"
-git push: 'heroku master'
-run 'heroku run rake db:migrate'
+# git :init
+# git add: "."
+# git commit: %Q{ -m 'Initial commit' }
+# git remote: "add origin https://github.com/sagaekeiga/#{@app_name}.git"
+# git push: '-u origin master'
+#
+#
+# run "heroku create #{@app_name}"
+# git push: 'heroku master'
+# run 'heroku run rake db:migrate'
